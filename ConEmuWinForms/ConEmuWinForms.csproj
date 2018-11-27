@@ -1,89 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Default</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1DC7D403-484B-43B4-B017-1356397A32CB}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <TargetFrameworks>net46</TargetFrameworks>
     <RootNamespace>ConEmu.WinForms</RootNamespace>
     <AssemblyName>ConEmu.WinForms</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
-    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Default|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <NoWarn>1696;1591</NoWarn>
-    <DocumentationFile>bin\ConEmu.WinForms.Xml</DocumentationFile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <NoWarn>$(NoWarn),1696,1591</NoWarn>
   </PropertyGroup>
+
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
     <AssemblyOriginatorKeyFile>Snk.Snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="ConEmu.Core" Version="18.1.31" PrivateAssets="all" />
-    <PackageReference Include="JetBrains.Annotations">
-      <Version>2018.2.1</Version>
-    </PackageReference>
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
     <PackageReference Include="Microsoft.VisualStudio.Threading" Version="15.8.132" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AnsiLog.cs" />
-    <Compile Include="AnsiStreamChunkEventArgs.cs" />
-    <Compile Include="ConEmuConstants.cs" />
-    <Compile Include="ConEmuControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="ConEmuSession.cs" />
-    <Compile Include="ConEmuStartInfo.cs" />
-    <Compile Include="GetInfoRoot.cs" />
-    <Compile Include="GuiMacroExecutor.cs" />
-    <Compile Include="GuiMacroBuilder.cs" />
-    <Compile Include="GuiMacroResult.cs" />
-    <Compile Include="ConsoleProcessExitedEventArgs.cs" />
-    <Compile Include="Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="States.cs" />
-    <Compile Include="Util\CommandLineBuilder.cs" />
-    <Compile Include="Util\WinApi.cs" />
-    <Compile Include="WhenConsoleProcessExits.cs" />
-  </ItemGroup>
+
   <ItemGroup>
     <Content Include="ConEmu.xml" />
-    <None Include="Package.nuspec">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Snk.Snk" />
   </ItemGroup>
+
   <ItemGroup>
-    <EmbeddedResource Include="Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <None Update="Package.nuspec" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.resx" Generator="ResXFileCodeGenerator" />
+  </ItemGroup>
+
 </Project>
