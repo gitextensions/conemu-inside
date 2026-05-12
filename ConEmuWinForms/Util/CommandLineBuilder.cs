@@ -88,7 +88,7 @@ SOFTWARE.
             }
         }
 
-        private StringBuilder _commandLine = new StringBuilder();
+        private readonly StringBuilder _commandLine = new StringBuilder();
 
         #endregion
 
@@ -237,7 +237,7 @@ SOFTWARE.
         {
             if (CommandLine.Length != 0 && CommandLine[CommandLine.Length - 1] != ' ')
             {
-                CommandLine.Append(" ");
+                CommandLine.Append(' ');
             }
         }
 
@@ -265,7 +265,7 @@ SOFTWARE.
         /// <param name="unquotedTextToAppend"></param>
         private void AppendQuotedTextToBuffer(StringBuilder buffer, string unquotedTextToAppend)
         {
-	        if(buffer==null)throw new ArgumentNullException("buffer");
+			ArgumentNullException.ThrowIfNull(buffer);
 
 	        if (unquotedTextToAppend != null)
             {
@@ -299,7 +299,7 @@ SOFTWARE.
                 buffer.Append(unquotedTextToAppend);
 
                 // Be careful any trailing slash doesn't escape the quote we're about to add
-                if (addQuotes && unquotedTextToAppend.EndsWith("\\", StringComparison.Ordinal))
+                if (addQuotes && unquotedTextToAppend.EndsWith('\\'))
                 {
                     buffer.Append('\\');
                 }
@@ -404,7 +404,7 @@ SOFTWARE.
         /// <param name="delimiter">The delimiter between file names</param>
         public void AppendFileNamesIfNotNull(string[] fileNames, string delimiter)
         {
-	        if((object)delimiter==null)throw new ArgumentNullException("delimiter");
+			ArgumentNullException.ThrowIfNull(delimiter);
 
 	        if ((fileNames != null) && (fileNames.Length > 0))
             {
@@ -442,7 +442,7 @@ SOFTWARE.
         /// <param name="switchName">The switch to append to the command line, may not be null</param>
         public void AppendSwitch(string switchName)
         {
-	        if((object)switchName==null)throw new ArgumentNullException("switchName");
+			ArgumentNullException.ThrowIfNull(switchName);
 
 	        AppendSpaceIfNotEmpty();
             AppendTextUnquoted(switchName);
@@ -459,7 +459,7 @@ SOFTWARE.
         /// <param name="parameter">Switch parameter to append, quoted if necessary. If null, this method has no effect.</param>
         public void AppendSwitchIfNotNull(string switchName, string parameter)
         {
-	        if((object)switchName==null)throw new ArgumentNullException("switchName");
+			ArgumentNullException.ThrowIfNull(switchName);
 
 	        if (parameter != null)
             {
@@ -475,7 +475,7 @@ SOFTWARE.
         /// </summary>
         /// <param name="switchName">Switch name for error message</param>
         /// <param name="parameter">Switch parameter to scan</param>
-        private void VerifyThrowNoEmbeddedDoubleQuotes(string switchName, string parameter)
+        private static void VerifyThrowNoEmbeddedDoubleQuotes(string switchName, string parameter)
         {
             if (parameter != null)
             {
@@ -504,8 +504,8 @@ SOFTWARE.
         /// <param name="delimiter">Delimiter to put between individual parameters, may not be null (may be empty)</param>
         public void AppendSwitchIfNotNull(string switchName, string[] parameters, string delimiter)
         {
-	        if((object)switchName==null)throw new ArgumentNullException("switchName");
-	        if((object)delimiter==null)throw new ArgumentNullException("delimiter");
+			ArgumentNullException.ThrowIfNull(switchName);
+			ArgumentNullException.ThrowIfNull(delimiter);
 
 	        if ((parameters != null) && (parameters.Length > 0))
             {
@@ -538,7 +538,7 @@ SOFTWARE.
         /// <param name="parameter">Switch parameter to append, not quoted. If null, this method has no effect.</param>
         public void AppendSwitchUnquotedIfNotNull(string switchName, string parameter)
         {
-	        if((object)switchName==null)throw new ArgumentNullException("switchName");
+			ArgumentNullException.ThrowIfNull(switchName);
 
 	        if (parameter != null)
             {
@@ -561,8 +561,8 @@ SOFTWARE.
         /// <param name="delimiter">Delimiter to put between individual parameters, may not be null (may be empty)</param>
         public void AppendSwitchUnquotedIfNotNull(string switchName, string[] parameters, string delimiter)
         {
-	        if((object)switchName==null)throw new ArgumentNullException("switchName");
-	        if((object)delimiter==null)throw new ArgumentNullException("delimiter");
+			ArgumentNullException.ThrowIfNull(switchName);
+			ArgumentNullException.ThrowIfNull(delimiter);
 
 	        if ((parameters != null) && (parameters.Length > 0))
             {
